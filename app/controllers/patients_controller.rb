@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
   def index
-    @patients = Patient.all.includes(:notes, :appointments)
+    @patients = current_user.patients.includes(:notes, :appointments)
 
     render json: @patients, status: :ok
   end
@@ -12,7 +12,7 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.create(patient_params)
+    @patient = current_user.patients.build(patient_params)
 
     @patient.save
 
@@ -20,7 +20,7 @@ class PatientsController < ApplicationController
   end
 
   def update
-    @patient = Patient.find(params[:id])
+    @patient = current_user.patients.where(id: params[:id]).first
 
     if @patient.update(patient_params)
       head(:ok)

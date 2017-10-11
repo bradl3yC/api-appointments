@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  resources :patients do
-    get :index
-  end
+  devise_for :users
 
-  resources :notes do
-    get :index
-  end
+  resources :patients
 
-  resources :appointments do
-    get :index
-  end
+  resources :notes
+
+  resources :appointments
+
+  resource :sessions, only: [:create, :destroy]
 
 end

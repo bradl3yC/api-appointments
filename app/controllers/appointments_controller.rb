@@ -1,7 +1,4 @@
-require 'date'
-
 class AppointmentsController < ApplicationController
-
   def index
     @appointments = Appointments.all
 
@@ -16,7 +13,7 @@ class AppointmentsController < ApplicationController
 
   def create
     @appointment = Appointment.create(appointment_params)
-    
+
     @appointment.save
 
     render json: @appointment, status: :created

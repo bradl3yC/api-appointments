@@ -10,6 +10,8 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'active_model_serializers'
+gem 'devise'
+gem 'simple_token_authentication', '~> 1.0'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
