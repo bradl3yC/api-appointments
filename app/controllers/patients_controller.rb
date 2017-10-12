@@ -5,6 +5,19 @@ class PatientsController < ApplicationController
     render json: @patients, status: :ok
   end
 
+  # /patients/show_date
+  def show_date
+    date = Date.parse(request.headers["X-For-Date"])
+
+    date_range = (date.beginning_of_day..date.end_of_day)
+
+    current_user_patients = Patient.where(user: current_user)
+
+    @appointments = Appointment.all.where(date_time: date_range).joins(:patient).merge(current_user_patients)
+
+    render json: @appointments, status: :ok
+  end
+
   def show
     @patient = Patient.find(params[:id])
 
@@ -20,6 +33,7 @@ class PatientsController < ApplicationController
   end
 
   def update
+
     @patient = current_user.patients.where(id: params[:id]).first
 
     if @patient.update(patient_params)
