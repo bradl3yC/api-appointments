@@ -26,7 +26,7 @@ class PatientsController < ApplicationController
 
   def create
     @patient = current_user.patients.build(patient_params)
-    puts current_user
+    puts "CREATED CREATED CREATED CREATED"
     @patient.save
 
     render json: @patient, status: :created
