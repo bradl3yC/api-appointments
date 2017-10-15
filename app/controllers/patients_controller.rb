@@ -18,6 +18,12 @@ class PatientsController < ApplicationController
     render json: @appointments, status: :ok
   end
 
+  def find_patient
+    @patients = current_user.patients.where(name: request.headers["X-Patient-Name"])
+    
+    render json: @patients, status: :ok
+  end
+
   def show
     @patient = Patient.find(params[:id])
 
